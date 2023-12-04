@@ -37,6 +37,13 @@ conda activate cnncls
 pip install -r requirements.txt
 ```
 
+## MLFLOW
+
+- [Documentation](https://mlflow.org/docs/latest/index.html)
+
+#### cmd
+- mlflow ui
+
 ### dagshub
 [dagshub](https://dagshub.com/)
 
