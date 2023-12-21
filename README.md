@@ -66,3 +66,65 @@ export MLFLOW_TRACKING_PASSWORD=286764511ed0bf1352a970cd4d290e45491e56c4
 1. dvc init
 2. dvc repro
 3. dvc dag
+
+
+## About MLFlow & DVC
+
+MLFlow
+
+    - Its Production Grade
+    - Trace all of your experiments
+    - Logging & tagging your model
+
+DVC
+
+    - Its very light weight for POC only
+    - Light weight experiment tracker
+    - It can perform Orchestration (Creating Pipelines)
+
+
+# AWS-CICD-Deployment-with-Github-Action
+
+## 1. Login to AWS console.
+
+## 2. Create IAM user for deployment
+    # With specific access
+    1. EC2 access: It is virtual machine
+    2. ECR: Elastic Container registry to save your docker image in aws
+
+    # Description: About the deployment
+    1. Build docker image of the source code
+    2. Push your docker image to ECR
+    3. Launch your EC2
+    4. Pull your image from ECR in EC2
+    5. Launch your docker image in EC2
+
+    # Policy:
+    1. AmazonEC2ContainerRegistryFullAccess
+    2. AmazonEC2FullAccess
+
+## 3. Create ECR repo to store/save docker image
+    - Save the URI: demo>> 566373416292.dkr.ecr.ap-south-1.amazonaws.com
+
+## 4. Create EC2 machine (Ubuntu)
+
+## 5. Open EC2 and Install docker in EC2 machine:
+    # optional
+    sudo apt-get update -y
+    sudo apt-get upgrade
+    
+    # required
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sudo sh get-docker.sh
+    sudo usermod -aG docker ubuntu
+    newgrp docker
+
+## 6. Configure EC2 as self-hosted runner:
+    setting -> actions -> runner -> new self hosted runner -> choose os -> then run command one by one
+
+## 7. Setup Github secrets:
+    AWS_ACCESS_KEY_ID=
+    AWS_SECRET_ACCESS_KEY=
+    AWS_REGION = us-east-1
+    AWS_ECR_LOGIN_URI = demo>> 566373416292.dkr.ecr.ap-south-1.amazonaws.com
+    ECR_REPOSITORY_NAME = kidney-disease-classification-app
